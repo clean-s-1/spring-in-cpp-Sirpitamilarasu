@@ -12,3 +12,55 @@ public:
 namespace Statistics {
     Stats ComputeStatistics(const std::vector<double>&);
 }
+//Interface
+class IAlerter
+{
+public:
+
+    virtual void checkNRaiseAlert(const std::vector<double>&) = 0;
+
+};
+
+//Email Alert class
+class EmailAlert : public IAlerter
+{
+public:
+    EmailAlert();
+    ~EmailAlert();
+
+    void checkNRaiseAlert(const std::vector<double>&) override;
+
+    bool emailSent;
+
+};
+
+//LEDAlertClass
+class LEDAlert : public IAlerter
+{
+public:
+    LEDAlert();
+    ~LEDAlert();
+
+    void checkNRaiseAlert(const std::vector<double>&) override;
+
+    bool ledGlows;
+};
+
+
+//Stats Alerter class
+class StatsAlerter
+{
+public:
+
+    StatsAlerter(float, const std::vector<IAlerter*>&);
+    StatsAlerter() {};
+    ~StatsAlerter();
+
+    void checkAndAlert(const std::vector<double>&);
+    
+
+private:
+
+    float maxThresholdValue;
+    std::vector<IAlerter*> alertersList;
+};
