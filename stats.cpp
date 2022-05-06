@@ -34,9 +34,10 @@ EmailAlert::~EmailAlert()
 {
 }
 
-void EmailAlert::checkNRaiseAlert(const std::vector<double>& val)
+void EmailAlert::checkNRaiseAlert(float threshold, const std::vector<double>& val)
 {
-    emailSent = true;
+    auto maxValue = std::max_element(val.begin(), val.end());
+    emailSent = (*maxValue > threshold) ? true : false;
 }
 
 
@@ -50,9 +51,10 @@ LEDAlert::~LEDAlert()
 {
 }
 
-void LEDAlert::checkNRaiseAlert(const std::vector<double>& val)
+void LEDAlert::checkNRaiseAlert(float threshold, const std::vector<double>& val)
 {
-    ledGlows = true;
+    auto maxValue = std::max_element(val.begin(), val.end());
+    ledGlows = (*maxValue > threshold) ? true : false;
 }
 
 
@@ -65,10 +67,17 @@ StatsAlerter::StatsAlerter(float threshold, const std::vector<IAlerter*>& alerte
 
 StatsAlerter::~StatsAlerter()
 {
-
+    for (auto& alerter : this->alertersList)
+    {
+        delete alerter;
+        alerter = nullptr;
+    }
 }
 
-void StatsAlerter::checkAndAlert(const std::vector<double>&)
+void StatsAlerter::checkAndAlert(const std::vector<double>& val)
 {
-
+    for (auto alerter : this->alertersList)
+    {
+        alerter->checkNRaiseAlert(this->maxThresholdValue, val);
+    }
 }
