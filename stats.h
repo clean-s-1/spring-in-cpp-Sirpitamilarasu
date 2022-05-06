@@ -7,6 +7,13 @@ public:
     double average;
     double min;
     double max;
+
+    Stats()
+    {
+        average = NAN;
+        min = NAN;
+        max = NAN;
+    }
 };
 
 namespace Statistics {
