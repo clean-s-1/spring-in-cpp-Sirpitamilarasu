@@ -6,22 +6,24 @@
 
 Stats Statistics::ComputeStatistics(const std::vector<double>& vec) {
     //Implement statistics here
-    Stats s;
+    Stats stats;
 
-    auto minmax = std::minmax_element(vec.begin(), vec.end());
-    s.min = *minmax.first;
-    s.max = *minmax.second;
-
-    double avg = 0;
-
-    for (auto& v : vec)
+    if (vec.size() > 0)
     {
-        avg = avg + v;
+        auto minmax = std::minmax_element(vec.begin(), vec.end());
+        stats.min = *minmax.first;
+        stats.max = *minmax.second;
+
+        double avg = 0;
+        for (auto& v : vec)
+        {
+            avg = avg + v;
+        }
+
+        stats.average = avg / vec.size();
     }
 
-    s.average = avg / vec.size();
-
-    return s;
+    return stats;
 }
 
 
