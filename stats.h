@@ -16,7 +16,6 @@ namespace Statistics {
 class IAlerter
 {
 public:
-
     virtual void checkNRaiseAlert(float threshold, const std::vector<double>&) = 0;
 
 };
