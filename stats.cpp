@@ -69,11 +69,6 @@ StatsAlerter::StatsAlerter(float threshold, const std::vector<IAlerter*>& alerte
 
 StatsAlerter::~StatsAlerter()
 {
-   /* for (auto& alerter : this->alertersList)
-    {
-        delete alerter;
-        alerter = nullptr;
-    }*/
 }
 
 void StatsAlerter::checkAndAlert(const std::vector<double>& val)
