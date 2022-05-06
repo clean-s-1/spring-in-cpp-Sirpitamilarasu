@@ -17,7 +17,7 @@ class IAlerter
 {
 public:
 
-    virtual void checkNRaiseAlert(const std::vector<double>&) = 0;
+    virtual void checkNRaiseAlert(float threshold, const std::vector<double>&) = 0;
 
 };
 
@@ -28,7 +28,7 @@ public:
     EmailAlert();
     ~EmailAlert();
 
-    void checkNRaiseAlert(const std::vector<double>&) override;
+    void checkNRaiseAlert(float threshold, const std::vector<double>&) override;
 
     bool emailSent;
 
@@ -41,7 +41,7 @@ public:
     LEDAlert();
     ~LEDAlert();
 
-    void checkNRaiseAlert(const std::vector<double>&) override;
+    void checkNRaiseAlert(float threshold, const std::vector<double>&) override;
 
     bool ledGlows;
 };
